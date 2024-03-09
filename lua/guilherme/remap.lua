@@ -51,3 +51,14 @@ end)
 vim.keymap.set("n", "<leader>vs", ":vsplit<Enter>")
 vim.keymap.set("n", "<leader>hs", ":split<Enter>")
 
+vim.keymap.set("n", "<leader>q", ":q<Enter>")
+vim.keymap.set("n", "<tab>", ":bnext<Enter>")
+vim.keymap.set("n", "<s-tab>", ":bprevious<Enter>")
+vim.keymap.set("n", "<leader>bc", ":bdelete<Enter>")
+
+vim.keymap.set("n", "<c-t>", ":NERDTreeToggle<CR>")
+
+
+-- Terminal
+vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
+vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]])

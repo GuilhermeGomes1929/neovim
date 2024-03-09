@@ -32,3 +32,10 @@ vim.opt.colorcolumn = "80"
 
 vim.g.mapleader = " "
 
+vim.g.airline_extensions_tabline_enabled = 1
+vim.g["airline#extensions#tabline#formatter"] = 'unique_tail'
+vim.g.airline_left_sep = ''
+vim.g.airline_left_alt_sep = ''
+vim.g.airline_right_sep = ''
+vim.g.airline_right_alt_sep = ''
+vim.g.airline_powerline_fonts = 1
