@@ -18,6 +18,7 @@ return require("packer").startup(function(use)
             vim.cmd("colorscheme rose-pine")
         end,
     })
+    use("Asheq/close-buffers.vim")
     use("goolord/alpha-nvim")
     use("nvim-tree/nvim-web-devicons")
     use("nvimtools/none-ls.nvim")

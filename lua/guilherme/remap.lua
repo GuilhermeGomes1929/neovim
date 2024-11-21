@@ -55,7 +55,11 @@ vim.keymap.set("n", "<tab>", ":bnext<Enter>")
 vim.keymap.set("n", "<s-tab>", ":bprevious<Enter>")
 vim.keymap.set("n", "<leader>bc", function ()
     vim.cmd("NERDTreeClose")
-    vim.cmd("bdelete")
+    vim.cmd("bp|bd#")
+end)
+vim.keymap.set("n", "<leader>sc", function ()
+    vim.cmd("NERDTreeClose")
+    vim.cmd("bd")
 end)
 
 vim.keymap.set("n", "<c-f>", ":NERDTreeToggle<CR>")
@@ -109,3 +113,15 @@ vim.keymap.set({"i", "s"}, "<C-E>", function()
 		ls.change_choice(1)
 	end
 end, {silent = true})
+
+
+-- Close Buffers
+vim.keymap.set("n", "<leader>ba", function()
+	vim.cmd("Bdelete all")
+end)
+vim.keymap.set("n", "<leader>bh", function()
+	vim.cmd("Bdelete hidden")
+end)
+vim.keymap.set("n", "<leader>bo", function()
+	vim.cmd("Bdelete other")
+end)
