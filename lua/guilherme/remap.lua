@@ -67,7 +67,15 @@ vim.keymap.set("n", "<c-f>", ":NERDTreeToggle<CR>")
 -- Terminal
 vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
 vim.keymap.set("t", "<C-w>", [[<C-\><C-n><C-w>]])
-
+vim.keymap.set("t", "<C-r>", ":ToggleTermSetName<CR>")
+vim.keymap.set("n", "<leader>tr", ":ToggleTermSetName<CR>")
+vim.keymap.set("n", "<leader>ts", ":TermSelect<CR>")
+vim.keymap.set("n", "<leader>te", function ()
+  local exec = vim.fn.input("Command > ")
+  vim.cmd("TermExec cmd=\"" .. exec .. "\"")
+end)
+vim.keymap.set("n", "<leader>tv", ":ToggleTermSendVisualLines<CR>")
+vim.keymap.set("n", "<leader>tl", ":ToggleTermSendCurrentLine<CR>")
 
 -- Lsp
 vim.keymap.set("n", "K", function()
@@ -100,6 +108,9 @@ end, {})
 vim.keymap.set("i", "<C-h>", function()
     vim.lsp.buf.signature_help()
 end, {})
+vim.keymap.set("n", "<leader>bf", function ()
+    vim.lsp.buf.format()
+end)
 
 -- Snippets
 local ls = require("luasnip")

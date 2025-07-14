@@ -11,6 +11,8 @@ require("nvim-treesitter.configs").setup({
 		"vimdoc",
 		"query",
 		"c_sharp",
+    "html",
+    "css",
 	},
 	sync_install = true,
 	auto_install = true,
@@ -18,6 +20,6 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 	},
 	indent = {
-		enable = true,
+		enable = false,
 	},
 })
