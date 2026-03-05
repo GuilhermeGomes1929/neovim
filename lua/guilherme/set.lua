@@ -14,7 +14,16 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("UserProfile") .. "\\AppData\\Local\\vim-data"
+local undodir = os.getenv("UserProfile") 
+    and (os.getenv("UserProfile") .. "\\AppData\\Local\\vim-data") -- Windows
+    or (os.getenv("HOME") .. "/.vim/undodir")                     -- Linux/Mac
+
+-- Cria o diretório caso ele não exista (evita erros de permissão)
+if vim.fn.isdirectory(undodir) == 0 then
+    vim.fn.mkdir(undodir, "p")
+end
+
+vim.opt.undodir = undodir
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
