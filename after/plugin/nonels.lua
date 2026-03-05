@@ -1,4 +1,7 @@
-local null_ls = require("null-ls")
+local status, null_ls = pcall(require, "null-ls")
+if not status then
+    return -- Para a execução se o telescope não estiver instalado
+end
 
 null_ls.setup({
 	sources = {

@@ -1,3 +1,7 @@
+local status, harpoon = pcall(require, "harpoon")
+if not status then
+    return -- Para a execução se o telescope não estiver instalado
+end
 local mark = require("harpoon.mark")
 local ui = require("harpoon.ui")
 

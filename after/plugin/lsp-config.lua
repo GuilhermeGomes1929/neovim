@@ -1,3 +1,7 @@
+local status, mason = pcall(require, "mason")
+if not status then
+    return -- Para a execução se o telescope não estiver instalado
+end
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = {

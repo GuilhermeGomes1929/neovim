@@ -1,4 +1,7 @@
-local ls = require("luasnip")
+local status, ls = pcall(require, "luasnip")
+if not status then
+    return -- Para a execução se o telescope não estiver instalado
+end
 local s = ls.snippet
 local t = ls.text_node
 local i = ls.insert_node
