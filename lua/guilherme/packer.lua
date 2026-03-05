@@ -43,13 +43,15 @@ return packer.startup(function(use)
     use("nvimtools/none-ls.nvim")
     use("Mofiqul/dracula.nvim")
     use("morhetz/gruvbox")
-    use("nvim-treesitter/nvim-treesitter", { run = ":TSUpdate" })
+    use({
+      "nvim-treesitter/nvim-treesitter",
+      run = function()
+          local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+          ts_update()
+      end,
+    })
     use("vim-airline/vim-airline")
     use("vim-airline/vim-airline-themes")
-    use({
-      "nvim-treesitter/playground",
-      after = "nvim-treesitter", -- Isso força o playground a esperar o treesitter
-    })
     use("theprimeagen/harpoon")
     use("mbbill/undotree")
     use("tpope/vim-fugitive")
