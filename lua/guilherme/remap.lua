@@ -113,7 +113,10 @@ vim.keymap.set("n", "<leader>bf", function ()
 end)
 
 -- Snippets
-local ls = require("luasnip")
+local status, ls = pcall(require, "luasnip")
+if not status then
+    return
+end
 
 vim.keymap.set("i", "<C-K>", function() ls.expand() end, {silent = true})
 vim.keymap.set({"i", "s"}, "<C-L>", function() ls.jump( 1) end, {silent = true})

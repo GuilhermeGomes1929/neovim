@@ -1,4 +1,7 @@
-local cmp = require("cmp")
+local status, cmp = pcall(require, "cmp")
+if not status then
+    return
+end
 require("luasnip.loaders.from_vscode").lazy_load()
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 cmp.setup({
