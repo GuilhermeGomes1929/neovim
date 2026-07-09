@@ -79,27 +79,39 @@ return packer.startup(function(use)
     use({
         "stevearc/dressing.nvim",
         config = function()
+            local current_theme = vim.g.colors_name or "dracula"
+            
             require("dressing").setup({
                 input = {
                     enabled = true,
                     default_prompt = "➤ ",
-                    -- Estilo do popup
-                    border = "rounded", -- bordas arredondadas
-                    relative = "cursor",  -- posição relativa ao cursor
-                    prefer_width = 60,    -- largura preferida
-                    min_width = 40,      -- largura mínima
-                    -- Caixa de sugestões abaixo
+                    -- Posicionamento: centralizado na tela
+                    prefer_width = 60,
+                    min_width = 40,
+                    max_width = 80,
+                    -- Aparece no meio da tela, não no cursor
+                    override = function(conf)
+                        conf.col = -1
+                        conf.row = -1
+                        conf.relative = "editor"
+                        conf.anchor = "center"
+                        return conf
+                    end,
+                    -- Estilo:
+                    border = "rounded",
+                    -- Sem transparência
                     win_options = {
-                        winblend = 10,   -- transparência
-                        winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+                        winblend = 0,
+                        winhighlight = "NormalFloat:" .. current_theme .. ",FloatBorder:" .. current_theme .. "Special",
                     },
-                    prompt_pos = "top",  -- prompt no topo
-                    title_pos = "center", -- título centralizado
-                    title = " Comando ",   -- título do popup
+                    prompt_pos = "top",
+                    title_pos = "center",
+                    title = " Comando ",
                 },
                 select = {
                     enabled = true,
                     backend = { "telescope", "builtin" },
+                    -- Estilo do dropdown
                     telescope = require("telescope.themes").get_dropdown({
                         border = true,
                         previewer = false,
