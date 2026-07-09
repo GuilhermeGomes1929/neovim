@@ -26,7 +26,7 @@ if not opencode_found then
     return
 end
 
-vim.notify("✅ OpenCode encontrado: " .. opencode_path, vim.log.levels.INFO)
+-- vim.notify("✅ OpenCode encontrado: " .. opencode_path, vim.log.levels.INFO)
 
 ---@type opencode.Opts
 vim.g.opencode_opts = {
@@ -89,7 +89,7 @@ vim.keymap.set("n", "goo", function() return require("opencode").operator("@this
 vim.keymap.set("n", "<A-u>", function() require("opencode").command("session.half.page.up") end, { desc = "Scroll OpenCode up" })
 vim.keymap.set("n", "<A-d>", function() require("opencode").command("session.half.page.down") end, { desc = "Scroll OpenCode down" })
 
-vim.notify("✅ OpenCode.nvim configurado com sucesso!", vim.log.levels.INFO)
-vim.notify("   Inicie manualmente: opencode --port", vim.log.levels.INFO)
-vim.notify("   Use <leader>oa para perguntar ao OpenCode", vim.log.levels.INFO)
-vim.notify("   Use <leader>os para selecionar opções", vim.log.levels.INFO)
+/-- vim.notify("✅ OpenCode.nvim configurado com sucesso!", vim.log.levels.INFO)
+/-- vim.notify("   Inicie manualmente: opencode --port", vim.log.levels.INFO)
+/-- vim.notify("   Use <leader>oa para perguntar ao OpenCode", vim.log.levels.INFO)
+/-- vim.notify("   Use <leader>os para selecionar opções", vim.log.levels.INFO)
