@@ -48,26 +48,30 @@ vim.g.opencode_opts = {
     },
 }
 
--- Autocomandos para eventos do OpenCode
+-- Handle OpenCode events
+-- Manipular eventos do OpenCode
 vim.api.nvim_create_autocmd("User", {
-    pattern = "OpencodeEvent:*",
+    pattern = "OpencodeEvent:*", -- Opcionalmente filtrar tipos de eventos
     callback = function(args)
-        local event = args.data and args.data.event
-        if not event or not event.type then
-            return
-        end
+        ---@type opencode.server.Event
+        local event = args.data.event
+        ---@type string
+        local url = args.data.url
+
+        -- Para debug: ver os tipos e propriedades do evento
+        -- vim.notify(vim.inspect(event), vim.log.levels.DEBUG)
         
-        -- Exemplo: notificar quando o status mudar
+        -- Do something useful
         if event.type == "session.status" then
             if event.properties and event.properties.status and event.properties.status.type then
-                vim.notify("OpenCode: " .. tostring(event.properties.status.type), vim.log.levels.INFO)
+                vim.notify("OpenCode status: " .. event.properties.status.type, vim.log.levels.INFO)
             end
         end
         
-        -- Exemplo: notificar quando houver edições
+        -- Notificar sobre edições
         if event.type == "file.edited" then
             if event.properties and event.properties.path then
-                vim.notify("OpenCode editou: " .. tostring(event.properties.path), vim.log.levels.INFO)
+                vim.notify("OpenCode editou: " .. event.properties.path, vim.log.levels.INFO)
             else
                 vim.notify("OpenCode editou arquivo", vim.log.levels.INFO)
             end
