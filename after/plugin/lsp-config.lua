@@ -54,7 +54,20 @@ vim.lsp.config('rust_analyzer', {
 
 -- Configuração para jdtls (Java)
 vim.lsp.config('jdtls', {
-	capabilities = capabilities,
+    capabilities = capabilities,
+    settings = {
+        java = {
+            configuration = {
+                updateBuildConfiguration = "automatic",
+            },
+            eclipse = {
+                downloadSources = true,
+            },
+            maven = {
+                downloadSources = true,
+            },
+        },
+    },
 })
 
 -- Habilitar todos os servidores configurados
