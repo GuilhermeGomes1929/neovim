@@ -30,13 +30,7 @@ return packer.startup(function(use)
         requires = { { "nvim-lua/plenary.nvim" } },
     })
     use("nvim-telescope/telescope-ui-select.nvim")
-    use({
-        "rose-pine/neovim",
-        as = "rose-pine",
-        config = function()
-            vim.cmd("colorscheme rose-pine")
-        end,
-    })
+    use("Mofiqul/dracula.nvim")
     use("Asheq/close-buffers.vim")
     use("goolord/alpha-nvim")
     use("nvim-tree/nvim-web-devicons")

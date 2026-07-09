@@ -79,3 +79,17 @@ vim.lsp.enable('html')
 vim.lsp.enable('cssls')
 vim.lsp.enable('rust_analyzer')
 vim.lsp.enable('jdtls')
+
+-- Keymaps para LSP (apenas se não existirem)
+if vim.fn.mapcheck("gi", "n") == "" then
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to implementation" })
+end
+if vim.fn.mapcheck("gd", "n") == "" then
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
+end
+if vim.fn.mapcheck("gr", "n") == "" then
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Go to references" })
+end
+if vim.fn.mapcheck("K", "n") == "" then
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation" })
+end
