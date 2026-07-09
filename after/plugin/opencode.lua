@@ -31,47 +31,10 @@ vim.notify("✅ OpenCode encontrado: " .. opencode_path, vim.log.levels.INFO)
 ---@type opencode.Opts
 vim.g.opencode_opts = {
     -- Configuração do servidor
+    -- Você deve iniciar manualmente: opencode --port
     server = {
-        -- Se não houver servidor rodando, tenta iniciar automaticamente
-        -- O binário 'opencode' deve estar no PATH
-        start = function()
-            vim.notify("🚀 Iniciando OpenCode...", vim.log.levels.INFO)
-            
-            -- Abre um split vertical na direita
-            vim.cmd("botright vsplit")
-            vim.cmd("wincmd l")
-            vim.cmd("enew")
-            
-            -- Definir buffer como terminal
-            vim.cmd("setlocal buftype=terminal")
-            
-            -- Iniciar o terminal com opencode
-            vim.fn.termopen("opencode --port", {
-                on_exit = function(job_id, exit_code, event_type)
-                    if exit_code ~= 0 then
-                        vim.notify("❌ OpenCode falhou ao iniciar (código: " .. exit_code .. ")", vim.log.levels.ERROR)
-                        vim.schedule(function()
-                            vim.cmd("close")
-                        end)
-                    else
-                        vim.notify("✅ OpenCode iniciado com sucesso!", vim.log.levels.INFO)
-                    end
-                end,
-            })
-            
-            -- Configurar opções do buffer
-            vim.api.nvim_buf_set_option(0, "buflisted", false)
-            vim.cmd("setlocal nospell")
-            vim.cmd("setlocal number")
-            vim.cmd("setlocal colorcolumn=")
-            vim.cmd("setlocal signcolumn=no")
-            vim.cmd("setlocal nobuflisted")
-            
-            -- Voltar para a janela original
-            vim.cmd("wincmd h")
-            
-            return true
-        end,
+        -- Usar servidor local na porta padrão
+        -- start = nil - Não iniciar automaticamente
     },
     
     -- Configuração de eventos
@@ -113,5 +76,6 @@ vim.api.nvim_create_autocmd("User", {
 })
 
 vim.notify("✅ OpenCode.nvim configurado com sucesso!", vim.log.levels.INFO)
+vim.notify("   Inicie manualmente: opencode --port", vim.log.levels.INFO)
 vim.notify("   Use <leader>oa para perguntar ao OpenCode", vim.log.levels.INFO)
 vim.notify("   Use <leader>os para selecionar opções", vim.log.levels.INFO)
