@@ -1,33 +1,68 @@
 local status, mason = pcall(require, "mason")
 if not status then
-    return -- Para a execução se o telescope não estiver instalado
+    return -- Para a execução se o mason não estiver instalado
 end
 require("mason").setup()
 require("mason-lspconfig").setup({
 	ensure_installed = {
-    "lua_ls", "csharp_ls", "eslint", "ts_ls", "html", "cssls", "rust_analyzer"
+    "lua_ls", "csharp_ls", "eslint", "ts_ls", "html", "cssls", "rust_analyzer", "jdtls"
   },
 })
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lspconfig = require("lspconfig")
-lspconfig.lua_ls.setup({
+
+-- Configurar capabilities
+local ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if not ok then
+    return
+end
+local capabilities = cmp_nvim_lsp.default_capabilities()
+
+-- Usar a nova API vim.lsp.config() do Neovim v0.11+
+-- Configuração para lua_ls
+vim.lsp.config('lua_ls', {
 	capabilities = capabilities,
 })
-lspconfig.csharp_ls.setup({
+
+-- Configuração para csharp_ls
+vim.lsp.config('csharp_ls', {
 	capabilities = capabilities,
 })
-lspconfig.eslint.setup({
+
+-- Configuração para eslint
+vim.lsp.config('eslint', {
 	capabilities = capabilities,
 })
-lspconfig.ts_ls.setup({
+
+-- Configuração para ts_ls
+vim.lsp.config('ts_ls', {
 	capabilities = capabilities,
 })
-lspconfig.html.setup({
+
+-- Configuração para html
+vim.lsp.config('html', {
 	capabilities = capabilities,
 })
-lspconfig.cssls.setup({
+
+-- Configuração para cssls
+vim.lsp.config('cssls', {
 	capabilities = capabilities,
 })
-lspconfig.rust_analyzer.setup({
+
+-- Configuração para rust_analyzer
+vim.lsp.config('rust_analyzer', {
 	capabilities = capabilities,
 })
+
+-- Configuração para jdtls (Java)
+vim.lsp.config('jdtls', {
+	capabilities = capabilities,
+})
+
+-- Habilitar todos os servidores configurados
+vim.lsp.enable('lua_ls')
+vim.lsp.enable('csharp_ls')
+vim.lsp.enable('eslint')
+vim.lsp.enable('ts_ls')
+vim.lsp.enable('html')
+vim.lsp.enable('cssls')
+vim.lsp.enable('rust_analyzer')
+vim.lsp.enable('jdtls')

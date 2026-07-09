@@ -62,9 +62,6 @@ return packer.startup(function(use)
     use({
         "akinsho/toggleterm.nvim",
         tag = "*",
-        config = function()
-            require("toggleterm").setup()
-        end,
     })
     use("williamboman/mason.nvim")
     use("williamboman/mason-lspconfig.nvim")
@@ -76,12 +73,7 @@ return packer.startup(function(use)
     use("saadparwaiz1/cmp_luasnip")
     use("rafamadriz/friendly-snippets")
 
-    use({
-        "windwp/nvim-autopairs",
-        config = function()
-            require("nvim-autopairs").setup({})
-        end,
-    })
+    use("windwp/nvim-autopairs")
     if packer_bootstrap then
         require('packer').sync()
     end
