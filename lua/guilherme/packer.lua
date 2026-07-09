@@ -91,10 +91,13 @@ return packer.startup(function(use)
                     max_width = 80,
                     -- Aparece no meio da tela, não no cursor
                     override = function(conf)
-                        conf.col = -1
-                        conf.row = -1
+                        -- Calcular posição central
+                        local width = math.min(vim.o.columns, conf.max_width or 80)
+                        local height = 1
+                        conf.col = math.floor((vim.o.columns - width) / 2)
+                        conf.row = math.floor((vim.o.lines - height) / 2)
                         conf.relative = "editor"
-                        conf.anchor = "center"
+                        conf.anchor = "NW"  -- anchor válido: NW, NE, SW, SE
                         return conf
                     end,
                     -- Estilo:
