@@ -122,7 +122,8 @@ return packer.startup(function(use)
         end,
     })
     
-    -- OpenCode - IA pair programming    use({
+    -- OpenCode - IA pair programming
+    use({
         "nickjvandyke/opencode.nvim",
         version = "*",
         config = function()
