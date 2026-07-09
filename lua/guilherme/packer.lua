@@ -75,8 +75,54 @@ return packer.startup(function(use)
 
     use("windwp/nvim-autopairs")
     
-    -- OpenCode - IA pair programming
+    -- UI improvements - dressing.nvim (comandos em popup)
     use({
+        "stevearc/dressing.nvim",
+        config = function()
+            require("dressing").setup({
+                input = {
+                    enabled = true,
+                    default_prompt = "➤ ",
+                    -- Estilo do popup
+                    border = "rounded", -- bordas arredondadas
+                    relative = "cursor",  -- posição relativa ao cursor
+                    prefer_width = 60,    -- largura preferida
+                    min_width = 40,      -- largura mínima
+                    -- Caixa de sugestões abaixo
+                    win_options = {
+                        winblend = 10,   -- transparência
+                        winhighlight = "NormalFloat:NormalFloat,FloatBorder:FloatBorder",
+                    },
+                    prompt_pos = "top",  -- prompt no topo
+                    title_pos = "center", -- título centralizado
+                    title = " Comando ",   -- título do popup
+                },
+                select = {
+                    enabled = true,
+                    backend = { "telescope", "builtin" },
+                    telescope = require("telescope.themes").get_dropdown({
+                        border = true,
+                        previewer = false,
+                        prompt_title = false,
+                    }),
+                },
+            })
+            
+            -- Substituir o comando padrão por versão mais visual
+            vim.api.nvim_create_user_command("Command", function()
+                vim.ui.input({ prompt = "➤ " }, function(input)
+                    if input then
+                        vim.cmd("" .. input)
+                    end
+                end)
+            end, {})
+            
+            -- Atalho para Command
+            vim.keymap.set("n", ";", ":<C-u>Command<CR>", { desc = "Command em popup" })
+        end,
+    })
+    
+    -- OpenCode - IA pair programming    use({
         "nickjvandyke/opencode.nvim",
         version = "*",
         config = function()
